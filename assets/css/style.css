@@ -43,6 +43,7 @@ body.wrong {
     background-color: white;
     border-radius: 5px;
     padding: 10px;
+    margin: 0 30px;
     /* x- and y- offset: 0 for it to be same around whole thing; blur: 10px for nice faded-out box shadow; spread: 2px how far out from container it goes */
     box-shadow: 0 0 10px 2px;
 }
