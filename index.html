@@ -8,12 +8,41 @@
     <title>The Quiz</title>
 </head>
 <body>
-<h1>The Quiz</h1>
+    <!-- To style in css later -->
+    <div class="container">
+        <!-- question container to come before next and start button -->
+        <!-- class="hide" so that we know it's going to be hidden by default -->
+        <div id="question-container" class="hide">
+            <div id="question">Question</div>
+            <!-- id for JavaScript; class for css -->
+            <div id="answer-buttons" class="btn-grid">
+                <button class="btn">Answer 1</button>
+                <button class="btn">Answer 2</button>
+                <button class="btn">Answer 3</button>
+                <button class="btn">Answer 4</button>
+            </div>
+        </div>
+        <!-- control section to style in css later -->
+        <div class="controls">
+            <!-- Need 2 different buttons; 1st will contain Start and 2nd will contain Next -->
+            <button id="start-btn" class="start-btn btn">Start</button>
+            <button id="next-btn" class="next-btn btn hide">Next</button>
+        </div>
+    </div>
 
-    <div id="clock">
+
+
+
+
+
+
+
+<!-- <h1>The Quiz</h1> -->
+
+    <!-- <div id="clock">
         <h1 id="time">60</h1>
     </div>
-    <div class="container"></div>
+    <div class="container"></div> -->
 
 <script src="./assets/js/script.js"></script>
 </body>
