@@ -1,14 +1,15 @@
-var time = 60;
-
 // define the button element that holds the start-btn id
-const startButton = document.getElementById('start-btn')
+const startButton = document.getElementById('start-btn');
 // define the button element that holds the next-btn id
-const nextButton = document.getElementById('next-btn') 
+const nextButton = document.getElementById('next-btn');
 
 // define the div element that holds the question-container id
-const questionContainerElement = document.getElementById('question-container')
-const questionElement = document.getElementById('question')
-const answerButtonsElement = document.getElementById('answer-buttons')
+const questionContainerElement = document.getElementById('question-container');
+const questionElement = document.getElementById('question');
+const answerButtonsElement = document.getElementById('answer-buttons');
+
+// define the div element that holds the countdown id
+const timerElement = document.getElementById('countdown');
 
 // shuffledQuestions so questions don't always show up in the same exact order and is completely random; currentQuestionIndex so we know which questions inside of the shuffled questions away we're on; will both default to a value of undefined
 let shuffledQuestions, currentQuestionIndex
@@ -16,8 +17,7 @@ let shuffledQuestions, currentQuestionIndex
 // add click event listener for when start button is clicked to cue code that is inside of startGame function
 startButton.addEventListener('click', () => {
     startGame();
-    var intervalId = setInterval(startTimer, 1000);
-    startTimer(intervalId);
+    startTimer();
 })
 // make Next button work by adding a click event listener
 nextButton.addEventListener('click', () => {
@@ -27,17 +27,29 @@ nextButton.addEventListener('click', () => {
     setNextQuestion()
 })
 
-function startTimer(interval) {
-    time--;
-    document.querySelector("#time").innerText = time;
-    if (time < 1) {
-        clearInterval(interval)
-    }
-};
+// timer function that counts down from 60
+function startTimer() {
+    let timeLeft = 60;
+    // use setInterval method to call function to be executed every 1000 milliseconds
+    var timeInterval = setInterval(function () {
+        // as long as timeLeft is greater than 1
+        if (timeLeft > 1) {
+            // set the text content of the timerElement to show the seconds remaining
+            timerElement.textContent = timeLeft + ' seconds remaining';
+            // decrement timeLeft by 1
+            timeLeft--;
+        } else if (timeLeft === 0) {
+            // once timeLeft reaches 0, set timeElement to an empty string
+            timerElement.textContent = '';
+            // use clearInterval method to stop timer
+            clearInterval(timeInterval);
+        }
+    },
+        1000);
+}
 
 // function to start game when start button is clicked
 function startGame() {
-    startTimer();
     // add hide class to start button so that it no longer shows up when start button is clicked
     // use classList not className because the start button already has a class of start-btn and btn; you're just adding another class to the list
     startButton.classList.add('hide');
@@ -53,7 +65,7 @@ function startGame() {
 }
 
 // function to set next question when next button is clicked
-function setNextQuestion () {
+function setNextQuestion() {
     // clears answers every single time we set our next question; resets everything related to our form, our questions, or body all back to its default state every time we set a new question
     resetState()
     // create function to get and show question and take our current question (which is our shuffled questions) at the current question index 
@@ -61,7 +73,7 @@ function setNextQuestion () {
 }
 
 // function to take a question object from the questions array
-function showQuestion (question) {
+function showQuestion(question) {
     questionElement.innerText = question.question
     // populate different answers by looping through question's answers
     question.answers.forEach(answer => {
@@ -77,7 +89,7 @@ function showQuestion (question) {
             button.dataset.correct = answer.correct
         }
         // add click event listener for when correct answer is clicked to cue code that is inside of selectAnswer function
-        button.addEventListener ('click', selectAnswer)
+        button.addEventListener('click', selectAnswer)
         // append button to answer button element
         answerButtonsElement.appendChild(button)
     })
@@ -94,10 +106,8 @@ function resetState() {
     }
 }
 
-
-
 // function when correct answer is selected; will take button addEventListener click event as a parameter
-function selectAnswer (event) {
+function selectAnswer(event) {
     // get which button we selected; event.target is whatever we clicked on
     const selectedButton = event.target
     // check to see if it is correct; const correct will be set equal to the selected button to check for dataset.correct from the 'if' loop in the showQuestion function
@@ -110,7 +120,7 @@ function selectAnswer (event) {
         setStatusClass(button, button.dataset.correct)
     })
     // check if we have any more questions to go through; check if length of shuffled questions is greater than the current question index + 1; this means we have more questions than we are currently on and not on the last question 
-    if(shuffledQuestions.length > currentQuestionIndex + 1) {
+    if (shuffledQuestions.length > currentQuestionIndex + 1) {
         // remove hidden class from Next button
         nextButton.classList.remove('hide')
     } else {
@@ -118,21 +128,21 @@ function selectAnswer (event) {
         startButton.innerText = 'Restart'
         startButton.classList.remove('hide')
     }
-    
+
 }
 
 // take element and whether or not it is correct
 function setStatusClass(element, correct) {
     // create function that will take any element we're going to clear status on
     clearStatusClass(element)
-        // if this is correct we want to add correct class
-        if (correct) {
-            element.classList.add('correct')
+    // if this is correct we want to add correct class
+    if (correct) {
+        element.classList.add('correct')
         // if this is incorrect we want to add wrong class
-        } else {
-            element.classList.add('wrong')
-        }
+    } else {
+        element.classList.add('wrong')
     }
+}
 
 // same as setStatusClass function but instead of adding classes we are removing them
 function clearStatusClass(element) {
@@ -144,10 +154,10 @@ function clearStatusClass(element) {
 const questions = [
     {
         // first object of array = first question; 'question:' is going to have the actual question itself (which is going to be the text of the question) and an array of answers with an object with a text keyword and correct keyword set to  either true or false
-        question:'What is 2 + 2?',
+        question: 'What is 2 + 2?',
         answers: [
-            {text: '4', correct: true},
-            {text: '22', correct: false}
+            { text: '4', correct: true },
+            { text: '22', correct: false }
         ]
     }
 ]

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" href="./assets/css/style.css">
     <meta charset="UTF-8">
@@ -7,34 +8,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Quiz</title>
 </head>
+
 <body>
     <!-- timer -->
-    <div id="clock">
-        <h1 id="time">60</h1>
+    <div class="timer-top">
+        <h1 id="countdown"></h1>
     </div>
-    <!-- to style in css later -->
-    <div class="container">
-        <!-- question container to come before next and start button -->
-        <!-- class="hide" so that we know it's going to be hidden by default -->
-        <div id="question-container" class="hide">
-            <div id="question">Question</div>
-            <!-- id for JavaScript; class for css -->
-            <div id="answer-buttons" class="btn-grid">
-                <button class="btn">Answer 1</button>
-                <button class="btn">Answer 2</button>
-                <button class="btn">Answer 3</button>
-                <button class="btn">Answer 4</button>
+    <main class="body">
+
+        <!-- to style in css later -->
+        <div class="container">
+            <!-- question container to come before next and start button -->
+            <!-- class="hide" so that we know it's going to be hidden by default -->
+            <div id="question-container" class="hide">
+                <div id="question">Question</div>
+                <!-- id for JavaScript; class for css -->
+                <div id="answer-buttons" class="btn-grid">
+                    <button class="btn">Answer 1</button>
+                    <button class="btn">Answer 2</button>
+                    <button class="btn">Answer 3</button>
+                    <button class="btn">Answer 4</button>
+                </div>
+            </div>
+            <!-- control section to style in css later -->
+            <div class="controls">
+                <!-- need 2 different buttons; 1st will contain Start and 2nd will contain Next -->
+                <button id="start-btn" class="start-btn btn">Start</button>
+                <button id="next-btn" class="next-btn btn hide">Next</button>
             </div>
         </div>
-        <!-- control section to style in css later -->
-        <div class="controls">
-            <!-- need 2 different buttons; 1st will contain Start and 2nd will contain Next -->
-            <button id="start-btn" class="start-btn btn">Start</button>
-            <button id="next-btn" class="next-btn btn hide">Next</button>
-        </div>
-    </div>
+    </main>
 
 
-<script src="./assets/js/script.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
+
 </html>

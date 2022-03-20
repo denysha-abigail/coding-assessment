@@ -16,24 +16,31 @@
     --hue-correct: 145;
 }
 
-body {
+.body, .timer-top {
     /* default neutral color in case nothing is selected as an answer */
     --hue: var(--hue-neutral);
     padding: 0;
     margin: 0;
     display: flex;
     width: 100vw;
-    height: 100vh;
     justify-content: center;
     align-items: center;
     background-color: hsl(var(--hue), 100%, 20%);
 }
 
-body.correct {
+.body {
+    height: 80vh;
+}
+
+.timer-top {
+    height: 20vh;
+}
+
+.body.correct {
     --hue: var(--hue-correct);
 }
 
-body.wrong {
+.body.wrong {
     --hue: var(--hue-wrong);
 }
 
