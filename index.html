@@ -11,11 +11,11 @@
 
 <body>
     <!-- timer -->
-    <div class="timer-top">
+    <div id="clock" class="timer-top">
         <h1 id="countdown"></h1>
     </div>
-    <main class="body">
 
+    <main class="body">
         <!-- to style in css later -->
         <div class="container">
             <!-- question container to come before next and start button -->
@@ -40,7 +40,7 @@
 
             <div id="end-game-container" class="hide">
                 <h3>Quiz Complete!</h3>
-                <div class="scorebox"></div>
+                <div id="scorebox"></div>
                 <form id="end-game-form">
                     <div class="initials-box">
                         <input type="text" name="initials" class="initials-input" placeholder="Enter Initials Here" max="3"/>

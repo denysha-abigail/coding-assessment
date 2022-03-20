@@ -15,7 +15,16 @@ const answerButtonsElement = document.getElementById('answer-buttons');
 const timerElement = document.getElementById('countdown');
 
 // define the div element that holds the end-game-container id
-const endContainerElement = document.getElementById('end-game-container') 
+const endContainerElement = document.getElementById('end-game-container');
+
+// define the div element that holds the end-game-form id
+const formElement = document.getElementById('end-game-form');
+
+// define the div element that holds the clock id
+const clock = document.getElementById('clock');
+
+// define the div element that holds the scorebox id
+const scoreBox = document.getElementById('scorebox');
 
 // shuffledQuestions so questions don't always show up in the same exact order and is completely random; currentQuestionIndex so we know which questions inside of the shuffled questions away we're on; will both default to a value of undefined
 let shuffledQuestions, currentQuestionIndex
@@ -142,10 +151,28 @@ function selectAnswer(event) {
 }
 
 function endGame () {
+    // set final score to score from timeLeft
+    const finalScore = score;
+    // show final score
+    scoreBox.textContent = "Final Score " + finalScore;
+    // set timeLeft to empty string to stop timer
+    timeLeft = "";
+    // set hide class to clock container to hide timer
+    clock.classList.add('hide');
     // after last question: show endContainerElement and hide questionContainerElement and Next button 
     questionContainerElement.classList.add('hide');
     nextButton.classList.add('hide');
     endContainerElement.classList.remove('hide');
+    // get user input
+    formElement.addEventListener("submit", (event) => {
+        event.preventDefault();
+        var initialsInput = document.querySelector("input[name='initials']").value;
+        console.log(initialsInput);
+        // store user input into array using localStorage
+        localStorage.setItem("Initials", initialsInput);
+    })
+    // store final score into array using localStorage
+    localStorage.setItem("Final Score", finalScore);
 }
 
 // take element and whether or not it is correct
