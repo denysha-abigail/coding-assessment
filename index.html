@@ -30,11 +30,26 @@
                     <button class="btn">Answer 4</button>
                 </div>
             </div>
+
             <!-- control section to style in css later -->
             <div class="controls">
                 <!-- need 2 different buttons; 1st will contain Start and 2nd will contain Next -->
                 <button id="start-btn" class="start-btn btn">Start</button>
                 <button id="next-btn" class="next-btn btn hide">Next</button>
+            </div>
+
+            <div id="end-game-container" class="hide">
+                <h3>Quiz Complete!</h3>
+                <div class="scorebox"></div>
+                <form id="end-game-form">
+                    <div class="initials-box">
+                        <input type="text" name="initials" class="initials-input" placeholder="Enter Initials Here" max="3"/>
+                    </div>
+                    <div class="initials-submit-btn">
+                        <button class="btn" id="initials-submit-btn" type="submit">Submit</button>
+
+                    </div>
+                </form>
             </div>
         </div>
     </main>

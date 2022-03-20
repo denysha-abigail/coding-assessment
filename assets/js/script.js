@@ -1,3 +1,6 @@
+let timeLeft = 60;
+let score = 0;
+
 // define the button element that holds the start-btn id
 const startButton = document.getElementById('start-btn');
 // define the button element that holds the next-btn id
@@ -10,6 +13,9 @@ const answerButtonsElement = document.getElementById('answer-buttons');
 
 // define the div element that holds the countdown id
 const timerElement = document.getElementById('countdown');
+
+// define the div element that holds the end-game-container id
+const endContainerElement = document.getElementById('end-game-container') 
 
 // shuffledQuestions so questions don't always show up in the same exact order and is completely random; currentQuestionIndex so we know which questions inside of the shuffled questions away we're on; will both default to a value of undefined
 let shuffledQuestions, currentQuestionIndex
@@ -29,11 +35,10 @@ nextButton.addEventListener('click', () => {
 
 // timer function that counts down from 60
 function startTimer() {
-    let timeLeft = 60;
     // use setInterval method to call function to be executed every 1000 milliseconds
     var timeInterval = setInterval(function () {
         // as long as timeLeft is greater than 1
-        if (timeLeft > 1) {
+        if (timeLeft >= 1) {
             // set the text content of the timerElement to show the seconds remaining
             timerElement.textContent = timeLeft + ' seconds remaining';
             // decrement timeLeft by 1
@@ -43,6 +48,7 @@ function startTimer() {
             timerElement.textContent = '';
             // use clearInterval method to stop timer
             clearInterval(timeInterval);
+            endGame();
         }
     },
         1000);
@@ -112,6 +118,12 @@ function selectAnswer(event) {
     const selectedButton = event.target
     // check to see if it is correct; const correct will be set equal to the selected button to check for dataset.correct from the 'if' loop in the showQuestion function
     const correct = selectedButton.dataset.correct
+    // add timeLeft to score when correct answer is selected and deduct timeLeft when incorrect answer is selected
+    if (correct) {
+        score += timeLeft;
+    } else {
+        timeLeft -= 5;
+    }
     // set status class of our body by creating function that will take document.body and take whether or not it should be set to correct or wrong
     setStatusClass(document.body, correct)
     // create an array from children of answerButtonsElement in order to be used with forEach loop and loop through all of the other buttons and set the class for them
@@ -124,11 +136,16 @@ function selectAnswer(event) {
         // remove hidden class from Next button
         nextButton.classList.remove('hide')
     } else {
-        // if on the last question, take Start button and change its text content to allow the user to restart
-        startButton.innerText = 'Restart'
-        startButton.classList.remove('hide')
+        // call endGame function
+        endGame();
     }
+}
 
+function endGame () {
+    // after last question: show endContainerElement and hide questionContainerElement and Next button 
+    questionContainerElement.classList.add('hide');
+    nextButton.classList.add('hide');
+    endContainerElement.classList.remove('hide');
 }
 
 // take element and whether or not it is correct
