@@ -1,36 +1,42 @@
 let timeLeft = 60;
 let score = 0;
+let initialsScore = [];
 
 // define the button element that holds the start-btn id
-const startButton = document.getElementById('start-btn');
+var startButton = document.getElementById('start-btn');
 // define the button element that holds the next-btn id
-const nextButton = document.getElementById('next-btn');
+var nextButton = document.getElementById('next-btn');
 
 // define the div element that holds the question-container id
-const questionContainerElement = document.getElementById('question-container');
-const questionElement = document.getElementById('question');
-const answerButtonsElement = document.getElementById('answer-buttons');
+var questionContainerElement = document.getElementById('question-container');
+var questionElement = document.getElementById('question');
+var answerButtonsElement = document.getElementById('answer-buttons');
 
 // define the div element that holds the countdown id
-const timerElement = document.getElementById('countdown');
+var timerElement = document.getElementById('countdown');
 
 // define the div element that holds the end-game-container id
-const endContainerElement = document.getElementById('end-game-container');
+var endContainerElement = document.getElementById('end-game-container');
 
 // define the div element that holds the end-game-form id
-const formElement = document.getElementById('end-game-form');
+var formElement = document.getElementById('end-game-form');
 
 // define the div element that holds the clock id
-const clock = document.getElementById('clock');
+var clock = document.getElementById('clock');
 
 // define the div element that holds the scorebox id
-const scoreBox = document.getElementById('scorebox');
+var scoreBox = document.getElementById('scorebox');
+
+// define the div element that holds the controls id
+var buttonBox = document.getElementById('controls');
 
 // shuffledQuestions so questions don't always show up in the same exact order and is completely random; currentQuestionIndex so we know which questions inside of the shuffled questions away we're on; will both default to a value of undefined
 let shuffledQuestions, currentQuestionIndex
 
 // add click event listener for when start button is clicked to cue code that is inside of startGame function
 startButton.addEventListener('click', () => {
+    clock.classList.remove('hide');
+    timeLeft = 60;
     startGame();
     startTimer();
 })
@@ -65,6 +71,10 @@ function startTimer() {
 
 // function to start game when start button is clicked
 function startGame() {
+    // hide form element
+    endContainerElement.classList.add('hide');
+    // hide start button
+    startButton.classList.add('hide');
     // add hide class to start button so that it no longer shows up when start button is clicked
     // use classList not className because the start button already has a class of start-btn and btn; you're just adding another class to the list
     startButton.classList.add('hide');
@@ -129,9 +139,9 @@ function selectAnswer(event) {
     const correct = selectedButton.dataset.correct
     // add timeLeft to score when correct answer is selected and deduct timeLeft when incorrect answer is selected
     if (correct) {
-        score += timeLeft;
+        score++;
     } else {
-        timeLeft -= 5;
+        timeLeft -= 10;
     }
     // set status class of our body by creating function that will take document.body and take whether or not it should be set to correct or wrong
     setStatusClass(document.body, correct)
@@ -150,11 +160,13 @@ function selectAnswer(event) {
     }
 }
 
-function endGame () {
+function endGame() {
     // set final score to score from timeLeft
-    const finalScore = score;
+    var finalScore = score;
+    // set score to zero
+    score = 0;
     // show final score
-    scoreBox.textContent = "Final Score " + finalScore;
+    scoreBox.textContent = "Final Score : " + finalScore;
     // set timeLeft to empty string to stop timer
     timeLeft = "";
     // set hide class to clock container to hide timer
@@ -163,17 +175,63 @@ function endGame () {
     questionContainerElement.classList.add('hide');
     nextButton.classList.add('hide');
     endContainerElement.classList.remove('hide');
+    // add form element back to html
+    endContainerElement.append(formElement);
     // get user input
     formElement.addEventListener("submit", (event) => {
         event.preventDefault();
         var initialsInput = document.querySelector("input[name='initials']").value;
-        console.log(initialsInput);
-        // store user input into array using localStorage
-        localStorage.setItem("Initials", initialsInput);
-    })
-    // store final score into array using localStorage
-    localStorage.setItem("Final Score", finalScore);
+        // check if input value is empty string
+        if (!initialsInput) {
+            alert("You need to input your initials!");
+            return false;
+        }
+        // create object that holds initials and score keys with their respective values
+        var userScore = {
+            initials: initialsInput,
+            score: finalScore,
+        };
+
+        // store initialsScore into locatStorage
+        var initialsScore = JSON.parse(localStorage.getItem("initialsScore")) || [];
+        initialsScore.push(userScore);
+        localStorage.setItem("initialsScore", JSON.stringify(initialsScore));
+
+
+
+        // loop object and print each info//
+        showScores();
+    });
+
+};
+
+function showScores() {
+    formElement.reset();
+    formElement.remove();
+    startButton.innerText = "Restart";
+    startButton.classList.remove('hide');
+
+    // var clearScores = document.createElement("button");
+    // clearScores.classList = "btn start-btn";
+    // clearScores.textContent = "Clear Scores";
+    // buttonBox.appendChild(clearScores);
+    // clearScores.addEventListener("click", () => {
+    //     localStorage.clear();
+    //     submitEl.reset();
+    // });
+    
+
+    var initialsScore = JSON.parse(localStorage.getItem("initialsScore")) || [];
+    for (i = 0; i < initialsScore.length; i++) {
+        var submitEl = document.createElement("li");
+        submitEl.className = "high-score";
+        submitEl.textContent = initialsScore[i].initials + " : " + initialsScore[i].score;
+        scoreBox.appendChild(submitEl);
+    }
+
+
 }
+
 
 // take element and whether or not it is correct
 function setStatusClass(element, correct) {
@@ -198,6 +256,20 @@ function clearStatusClass(element) {
 const questions = [
     {
         // first object of array = first question; 'question:' is going to have the actual question itself (which is going to be the text of the question) and an array of answers with an object with a text keyword and correct keyword set to  either true or false
+        question: 'What is 2 + 2?',
+        answers: [
+            { text: '4', correct: true },
+            { text: '22', correct: false }
+        ]
+    },
+    {
+        question: 'What is 2 + 2?',
+        answers: [
+            { text: '4', correct: true },
+            { text: '22', correct: false }
+        ]
+    },
+    {
         question: 'What is 2 + 2?',
         answers: [
             { text: '4', correct: true },
