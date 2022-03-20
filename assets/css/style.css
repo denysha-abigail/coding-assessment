@@ -1,72 +1,70 @@
-/* .container {
-    width: 90%;
-    margin: 10px auto;
-} */
-
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Orbitron&family=Special+Elite&display=swap');
 
 *, *::before, *::after {
     box-sizing: border-box;
     font-family: 'Special Elite', cursive;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
 :root {
-    --hue-neutral: 200;
-    --hue-wrong: 0;
-    --hue-correct: 145;
-}
-
-.body, .timer-top {
-    /* default neutral color in case nothing is selected as an answer */
-    --hue: var(--hue-neutral);
-    padding: 0;
-    margin: 0;
-    display: flex;
-    width: 100vw;
-    justify-content: center;
-    align-items: center;
-    background-color: hsl(var(--hue), 100%, 20%);
-}
-
-.body {
-    height: 80vh;
+    --olive: rgba(95, 103, 105);
+    --linen: rgb(241, 239, 233);
+    --drk-grey: rgb(60, 66, 69);
+    --sand: rgba(135, 100, 69, .75);
+    --incorrect: rgba(174, 67, 30, .85);
+    --correct: rgba(86, 97, 83, .85);
 }
 
 .timer-top {
-    height: 20vh;
+    color: var(--linen);
+    font-size: 10px;
+    height: 50px;
+    width: 50px;
+    margin: 0;
+    padding: 16px 0 1px;
+    border: 1px solid var(--linen);
+    border-radius: 50%;
+    text-align: center;
 }
 
-.body.correct {
-    --hue: var(--hue-correct);
+.body {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: var(--olive);
 }
 
-.body.wrong {
-    --hue: var(--hue-wrong);
+.question, .quiz-complete {
+    color: var(--drk-grey)
 }
 
 .container {
     width: 800px;
     max-width: 80%;
-    background-color: white;
+    background-color: var(--linen);
     border-radius: 5px;
     padding: 10px;
     margin: 0 30px;
-    /* x- and y- offset: 0 for it to be same around whole thing; blur: 10px for nice faded-out box shadow; spread: 2px how far out from container it goes */
-    box-shadow: 0 0 10px 2px;
+    box-shadow: 0 0 5px 1px;
 }
 
 .btn-grid {
     display: grid;
     grid-template-columns: repeat(2, auto);
     gap: 10px;
-    /* 20px top/bottom 0px left/right */
     margin: 20px 0;
 }
 
 .btn {
-    --hue: var(--hue-neutral);
-    border: 1px solid hsl(var(--hue), 100%, 30%);
-    background-color: hsl(var(--hue), 100%, 50%);
+    border: 1px solid var(--olive);
+    background-color: var(--sand);
     border-radius: 5px;
     padding: 5px 10px;
     color: white;
@@ -75,15 +73,15 @@
 
 .btn:hover {
     border-color: black;
+    opacity: 50%;
 }
 
 .btn.correct {
-    --hue: var(--hue-correct);
-    color: black;
+    background-color: var(--correct);
 }
 
 .btn.wrong {
-    --hue: var(--hue-wrong);
+    background-color: var(--incorrect);
 }
 
 .start-btn, .next-btn {
@@ -100,4 +98,14 @@
 
 .hide {
     display: none;
+}
+
+.end-game-container {
+    line-height: 3rem;
+    padding: 15px;
+    text-align: center;
+}
+
+.input {
+    
 }

@@ -55,7 +55,7 @@ function startTimer() {
         // as long as timeLeft is greater than 1
         if (timeLeft >= 1) {
             // set the text content of the timerElement to show the seconds remaining
-            timerElement.textContent = timeLeft + ' seconds remaining';
+            timerElement.textContent = timeLeft;
             // decrement timeLeft by 1
             timeLeft--;
         } else if (timeLeft === 0) {
@@ -232,7 +232,6 @@ function showScores() {
 
 }
 
-
 // take element and whether or not it is correct
 function setStatusClass(element, correct) {
     // create function that will take any element we're going to clear status on
@@ -256,26 +255,50 @@ function clearStatusClass(element) {
 const questions = [
     {
         // first object of array = first question; 'question:' is going to have the actual question itself (which is going to be the text of the question) and an array of answers with an object with a text keyword and correct keyword set to  either true or false
-        question: 'What is 2 + 2?',
+        question: 'Inside the HTML document, where do you place your JavaScript code?',
         answers: [
-            { text: '4', correct: true },
-            { text: '22', correct: false }
+            { text: 'Inside the <link> element', correct: false },
+            { text: 'Inside the <footer> element', correct: false },
+            { text: 'Inside the <script> element', correct: true },
+            { text: 'Inside the <head> element', correct: false }
         ]
     },
     {
-        question: 'What is 2 + 2?',
+        question: 'What operator is used to assign a value to a declared variable?',
         answers: [
-            { text: '4', correct: true },
-            { text: '22', correct: false }
+            { text: 'Equal sign (=)', correct: true },
+            { text: 'Colon (:)', correct: false },
+            { text: 'Question mark (?)', correct: false },
+            { text: 'Double-equal (==)', correct: false }
         ]
     },
     {
-        question: 'What is 2 + 2?',
+        question: 'How do we declare a conditional statement in JavaScript?',
         answers: [
-            { text: '4', correct: true },
-            { text: '22', correct: false }
+            { text: 'for loop', correct: false },
+            { text: 'while loop', correct: false },
+            { text: 'if...else', correct: true },
+            { text: 'difference...between', correct: false },
         ]
-    }
+    },
+    {
+        question: 'Which statement below is NOT true about functions in JavaScript?',
+        answers: [
+            { text: 'A function must always be assigned an identifier', correct: true },
+            { text: 'Functions are able to be recursive.', correct: false },
+            { text: 'Functions can be reused throughout your code', correct: false },
+            { text: 'Functions can receive arguments that can alter the output of a function', correct: false },
+        ]
+    },
+    {
+        question: "From the given array which index is the letter 'b' on? ['a', 'b', 'c', 'd']?",
+        answers: [
+            { text: '0', correct: false },
+            { text: '2', correct: false },
+            { text: '3', correct: false },
+            { text: '1', correct: true },
+        ]
+    },
 ]
 
 
@@ -292,51 +315,3 @@ const questions = [
 
 
 
-// var time = 60;
-// var qAIndex = 0;
-
-// var qA = [
-//     {
-//         question: 'Is the sky blue?',
-//         answer: ["A", "B", "C", "D"],
-//         correct: "C"
-//     },
-//     {
-//         question: 'Is the sky blue?',
-//         answer: ["A", "B", "C", "D"],
-//         correct: "C"
-//     },
-//     {
-//         question: 'Is the sky blue?',
-//         answer: ["A", "B", "C", "D"],
-//         correct: "C"
-//     },
-//     {
-//         question: 'Is the sky blue?',
-//         answer: ["A", "B", "C", "D"],
-//         correct: "C"
-//     }
-// ];
-
-// function showQ() {
-//     if (qAIndex < qA.length) {
-//         let obj = qA[qAIndex];
-//         document.querySelector('.container').innerHTML = `
-//         <div>
-//             <h2>${obj.question}</h2>
-//         </div>
-//         `
-//     }
-// }
-
-// showQ();
-
-// var intervalId = setInterval(startQuiz, 1000);
-
-// function startQuiz() {
-//     time--;
-//     document.querySelector("#time").innerText = time;
-//     if (time < 1) {
-//         clearInterval(intervalId)
-//     }
-// }
