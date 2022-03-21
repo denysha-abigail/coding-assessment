@@ -12,7 +12,7 @@ Built with HTML, CSS, and JavaScript, this interactive self-assessment is design
 
 ## How to Use:
 
-When you click the Start button, you will be given 60 seconds to answer questions encompassing foundational JavaScript concepts. When the timer reaches 0 or when every question has been answered, you will be prompted to enter your initials and save your score for progress comparison.
+When you click the Start button, you will be given 60 seconds to answer questions encompassing foundational JavaScript concepts. If a question is answered incorrectly, 5 seconds will be deducted from your timer. When the timer reaches 0, or when every question has been answered, you will be prompted to enter your initials and save your score for progress comparison.
 
 ## Website:
 Access Phase I : The Self Assessment [HERE](https://denysha-abigail.github.io/coding-assessment/)
