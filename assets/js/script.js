@@ -226,17 +226,6 @@ function showScores() {
     }
 };
 
-function clearScores() {
-    // var clearScores = document.createElement("button");
-    // clearScores.classList = "btn start-btn";
-    // clearScores.textContent = "Clear Scores";
-    // buttonBox.appendChild(clearScores);
-    // clearScores.addEventListener("click", () => {
-    //     localStorage.clear();
-    //     submitEl.reset();
-    // });
-}
-
 // take element and whether or not it is correct
 function setStatusClass(element, correct) {
     // create function that will take any element we're going to clear status on
