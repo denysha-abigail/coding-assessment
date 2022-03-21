@@ -1,4 +1,4 @@
-# Welcome to Phase I : The Self-Assessment
+# Phase I : The Self-Assessment
 
 ## Beta Version 0.1
 
@@ -15,7 +15,7 @@ Built with HTML, CSS, and JavaScript, this interactive self-assessment is design
 When you click the Start button, you will be given 60 seconds to answer questions encompassing foundational JavaScript concepts. When the timer reaches 0 or when every question has been answered, you will be prompted to enter your initials and save your score for progress comparison.
 
 ## Website:
-Access Phase I : The Self Assessment [here](https://denysha-abigail.github.io/coding-assessment/)
+Access Phase I : The Self Assessment [HERE](https://denysha-abigail.github.io/coding-assessment/)
 
 ## Preview:
 ![screenshot](/assets/images/start-screen-img.png)
