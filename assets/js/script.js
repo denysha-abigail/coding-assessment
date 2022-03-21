@@ -2,6 +2,9 @@ let timeLeft = 60;
 let score = 0;
 let initialsScore = [];
 
+// define the div element that holds the instructions id
+var instructionsBox = document.getElementById('instructions');
+
 // define the button element that holds the start-btn id
 var startButton = document.getElementById('start-btn');
 // define the button element that holds the next-btn id
@@ -31,7 +34,7 @@ var scoreBox = document.getElementById('scorebox');
 var buttonBox = document.getElementById('controls');
 
 // shuffledQuestions so questions don't always show up in the same exact order and is completely random; currentQuestionIndex so we know which questions inside of the shuffled questions away we're on; will both default to a value of undefined
-let shuffledQuestions, currentQuestionIndex
+let shuffledQuestions, currentQuestionIndex;
 
 // add click event listener for when start button is clicked to cue code that is inside of startGame function
 startButton.addEventListener('click', () => {
@@ -43,9 +46,9 @@ startButton.addEventListener('click', () => {
 // make Next button work by adding a click event listener
 nextButton.addEventListener('click', () => {
     // take our current question index and add 1 to it so it increments to the next question we have
-    currentQuestionIndex++
+    currentQuestionIndex++;
     // call the setNextQuestion function
-    setNextQuestion()
+    setNextQuestion();
 })
 
 // timer function that counts down from 60
@@ -65,14 +68,15 @@ function startTimer() {
             clearInterval(timeInterval);
             endGame();
         }
-    },
-        1000);
+    }, 1000);
 }
 
 // function to start game when start button is clicked
 function startGame() {
     // hide form element
     endContainerElement.classList.add('hide');
+    // hide instructions
+    instructionsBox.classList.add('hide');
     // hide start button
     startButton.classList.add('hide');
     // add hide class to start button so that it no longer shows up when start button is clicked
@@ -92,68 +96,68 @@ function startGame() {
 // function to set next question when next button is clicked
 function setNextQuestion() {
     // clears answers every single time we set our next question; resets everything related to our form, our questions, or body all back to its default state every time we set a new question
-    resetState()
+    resetState();
     // create function to get and show question and take our current question (which is our shuffled questions) at the current question index 
     showQuestion(shuffledQuestions[currentQuestionIndex]);
 }
 
 // function to take a question object from the questions array
 function showQuestion(question) {
-    questionElement.innerText = question.question
+    questionElement.innerText = question.question;
     // populate different answers by looping through question's answers
     question.answers.forEach(answer => {
         // create button for each answer
-        const button = document.createElement('button')
+        const button = document.createElement('button');
         // set inner text of button to be equal to the text keyword value of the answers array
-        button.innerText = answer.text
+        button.innerText = answer.text;
         // set btn class to button
-        button.classList.add('btn')
+        button.classList.add('btn');
         // check if answer is correct
         if (answer.correct) {
             // dataset will add data attribute onto button element; attribute of correct is added with a value of answer.correct
-            button.dataset.correct = answer.correct
+            button.dataset.correct = answer.correct;
         }
         // add click event listener for when correct answer is clicked to cue code that is inside of selectAnswer function
-        button.addEventListener('click', selectAnswer)
+        button.addEventListener('click', selectAnswer);
         // append button to answer button element
-        answerButtonsElement.appendChild(button)
+        answerButtonsElement.appendChild(button);
     })
 }
 
 function resetState() {
     // clear background color between sets
-    clearStatusClass(document.body)
+    clearStatusClass(document.body);
     // hide Next button; after answer is clicked we are going to show the Next button; when we show next question we are going to hide the Next button
-    nextButton.classList.add('hide')
+    nextButton.classList.add('hide');
     // loop through all the children for our answer button elements; if there is a child inside the answer button element we want to remove it
     while (answerButtonsElement.firstChild) {
-        answerButtonsElement.removeChild(answerButtonsElement.firstChild)
+        answerButtonsElement.removeChild(answerButtonsElement.firstChild);
     }
 }
 
 // function when correct answer is selected; will take button addEventListener click event as a parameter
 function selectAnswer(event) {
     // get which button we selected; event.target is whatever we clicked on
-    const selectedButton = event.target
+    const selectedButton = event.target;
     // check to see if it is correct; const correct will be set equal to the selected button to check for dataset.correct from the 'if' loop in the showQuestion function
-    const correct = selectedButton.dataset.correct
-    // add timeLeft to score when correct answer is selected and deduct timeLeft when incorrect answer is selected
+    const correct = selectedButton.dataset.correct;
+    // add one point to score for every correct answer that is selected and deduct timeLeft when incorrect answer is selected
     if (correct) {
         score++;
     } else {
         timeLeft -= 10;
     }
     // set status class of our body by creating function that will take document.body and take whether or not it should be set to correct or wrong
-    setStatusClass(document.body, correct)
+    setStatusClass(document.body, correct);
     // create an array from children of answerButtonsElement in order to be used with forEach loop and loop through all of the other buttons and set the class for them
     Array.from(answerButtonsElement.children).forEach(button => {
         // take button and check button.dataset.correct to set the status based on whether or not that answer was a correct answer
-        setStatusClass(button, button.dataset.correct)
+        setStatusClass(button, button.dataset.correct);
     })
     // check if we have any more questions to go through; check if length of shuffled questions is greater than the current question index + 1; this means we have more questions than we are currently on and not on the last question 
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
         // remove hidden class from Next button
-        nextButton.classList.remove('hide')
+        nextButton.classList.remove('hide');
     } else {
         // call endGame function
         endGame();
@@ -190,15 +194,11 @@ function endGame() {
         var userScore = {
             initials: initialsInput,
             score: finalScore,
-        };
-
+        }
         // store initialsScore into locatStorage
         var initialsScore = JSON.parse(localStorage.getItem("initialsScore")) || [];
         initialsScore.push(userScore);
         localStorage.setItem("initialsScore", JSON.stringify(initialsScore));
-
-
-
         // loop object and print each info//
         showScores();
     });
@@ -206,11 +206,27 @@ function endGame() {
 };
 
 function showScores() {
+    // reset input box
     formElement.reset();
+    // remove form element when user submits initials
     formElement.remove();
+    // change inner text of start button to restart after user submits initials
     startButton.innerText = "Restart";
+    // unhide the start button with the new innerText of Restart
     startButton.classList.remove('hide');
 
+    // append initials and score from localStorage to list element
+    var initialsScore = JSON.parse(localStorage.getItem("initialsScore")) || [];
+    for (i = 0; i < initialsScore.length; i++) {
+        var submitEl = document.createElement("li");
+        submitEl.className = "high-score";
+        submitEl.textContent = initialsScore[i].initials + " : " + initialsScore[i].score;
+        scoreBox.appendChild(submitEl);
+        scoreBox.setAttribute("style", "color: var(--header");
+    }
+};
+
+function clearScores() {
     // var clearScores = document.createElement("button");
     // clearScores.classList = "btn start-btn";
     // clearScores.textContent = "Clear Scores";
@@ -219,17 +235,6 @@ function showScores() {
     //     localStorage.clear();
     //     submitEl.reset();
     // });
-    
-
-    var initialsScore = JSON.parse(localStorage.getItem("initialsScore")) || [];
-    for (i = 0; i < initialsScore.length; i++) {
-        var submitEl = document.createElement("li");
-        submitEl.className = "high-score";
-        submitEl.textContent = initialsScore[i].initials + " : " + initialsScore[i].score;
-        scoreBox.appendChild(submitEl);
-    }
-
-
 }
 
 // take element and whether or not it is correct
@@ -243,7 +248,7 @@ function setStatusClass(element, correct) {
     } else {
         element.classList.add('wrong')
     }
-}
+};
 
 // same as setStatusClass function but instead of adding classes we are removing them
 function clearStatusClass(element) {
@@ -252,7 +257,7 @@ function clearStatusClass(element) {
 }
 
 // list of questions initialized to an array
-const questions = [
+var questions = [
     {
         // first object of array = first question; 'question:' is going to have the actual question itself (which is going to be the text of the question) and an array of answers with an object with a text keyword and correct keyword set to  either true or false
         question: 'Inside the HTML document, where do you place your JavaScript code?',

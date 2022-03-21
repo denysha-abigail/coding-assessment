@@ -10,11 +10,12 @@
 
 :root {
     --olive: rgba(95, 103, 105);
-    --linen: rgb(241, 239, 233);
+    --linen: rgb(223, 205, 195);
+    --header: rgb(24, 29, 49);
     --drk-grey: rgb(60, 66, 69);
-    --sand: rgba(135, 100, 69, .75);
-    --incorrect: rgba(174, 67, 30, .85);
-    --correct: rgba(86, 97, 83, .85);
+    --sand: rgba(158, 119, 119, .75);
+    --incorrect: rgb(111, 76, 91);
+    --correct: rgba(86, 97, 83, .8);
 }
 
 .timer-top {
@@ -26,7 +27,18 @@
     padding: 16px 0 1px;
     border: 1px solid var(--linen);
     border-radius: 50%;
+    background-color: var(--sand);
     text-align: center;
+}
+
+.instructions {
+    color: var(--header);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
 }
 
 .body {
@@ -42,7 +54,9 @@
 }
 
 .question, .quiz-complete {
-    color: var(--drk-grey)
+    color: var(--header);
+    font-size: 17px;
+    text-align: center;
 }
 
 .container {
@@ -68,11 +82,12 @@
     border-radius: 5px;
     padding: 5px 10px;
     color: white;
+    font-size: 17px;
     outline: none;
 }
 
 .btn:hover {
-    border-color: black;
+    border-color: var(--drk-grey);
     opacity: 50%;
 }
 
@@ -85,7 +100,7 @@
 }
 
 .start-btn, .next-btn {
-    font-size: 1.5rem;
+    font-size: 20px;
     font-weight: bold;
     padding: 10px 20px;
 }
@@ -106,6 +121,19 @@
     text-align: center;
 }
 
-.input {
-    
+form input {
+    outline: none;
+    border: none;
+    padding: 12px;
+    width: 50%;
+    font-size: 15px;
+    color: var(--header);
+    border: 2px solid var(--olive);
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
+form input:focus{
+    background-color: rgba(255, 255, 255, 1);
+    outline: none;
 }

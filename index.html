@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Assignment</title>
+    <title>Phase I : The Assessment</title>
 </head>
 
 <body>
@@ -15,6 +15,16 @@
         <div id="clock" class="timer-top">
             <h1 id="countdown"></h1>
         </div>
+
+        <!-- instructions container -->
+        <div id="instructions" class="instructions">
+            <h2>Welcome to the JavaScript portion of the self-assessment section.</h2>
+            <br>
+            <h3>When you click the Start button, you will be given 60 seconds to answer questions
+                encompassing foundational JavaScript concepts. When the timer reaches 0 or when every question has been
+                answered, you will be prompted to enter your initials and save your score for progress comparison.</h3>
+        </div>
+
         <!-- question container -->
         <div class="container">
             <div id="question-container" class="hide">
@@ -36,7 +46,9 @@
             <!-- end game container -->
             <div id="end-game-container" class="end-game-container hide">
                 <h3 class="quiz-complete">Quiz Complete!</h3>
-                <div id="scorebox"></div>
+                <div id="scorebox">
+                    <ul></ul>
+                </div>
                 <form id="end-game-form">
                     <div class="initials-box">
                         <input type="text" name="initials" class="initials-input" placeholder="Enter Initials Here"
